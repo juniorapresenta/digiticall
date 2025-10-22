@@ -177,13 +177,22 @@
                         </p>
                     </div>
                     
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button onclick="scrollToServices()" class="bg-white text-blue-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-                            Conheça Nossas Soluções
-                        </button>
-                        <button onclick="scrollToContact()" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-800 transition-colors">
-                            Fale com um Especialista
-                        </button>
+                   <!-- Substitua as linhas 180-186 por este bloco -->
+<div class="flex flex-col sm:flex-row gap-4">
+  <!-- âncora para rolar até a seção de serviços -->
+  <a href="#servicos"
+     class="bg-white text-blue-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg inline-block"
+     role="button" aria-label="Conheça Nossas Soluções">
+    Conheça Nossas Soluções
+  </a>
+
+  <!-- link relativo para a página service.html (mesmo diretório) -->
+  <a href="./service.html"
+     class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-800 transition-colors inline-block text-center"
+     role="button" aria-label="Fale com um Especialista">
+    Fale com um Especialista
+  </a>
+</div>
                     </div>
                 </div>
                 
@@ -1148,4 +1157,5 @@
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9843b1f737f16472',t:'MTc1ODczMTcyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
