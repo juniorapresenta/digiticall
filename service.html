@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiTICall - Avaliação Gratuita de Infraestrutura de TI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-green: #059669;
+            --neutral-gray: #374151;
+            --light-blue: #3b82f6;
+            --light-green: #10b981;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 50%, var(--secondary-green) 100%);
+        }
+        
+        .service-icon {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+        }
+        
+        .brasilia-pattern {
+            background-image: 
+                linear-gradient(45deg, transparent 40%, rgba(59, 130, 246, 0.05) 50%, transparent 60%),
+                linear-gradient(-45deg, transparent 40%, rgba(16, 185, 129, 0.05) 50%, transparent 60%);
+            background-size: 40px 40px;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        
+        .service-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(30, 58, 138, 0.15);
+        }
+        
+        .floating-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--secondary-green);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .checkbox-custom {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .checkbox-custom:checked {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .checkbox-custom:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-800 to-green-600 rounded-xl flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">DigiTICall</h1>
+                        <p class="text-sm text-gray-600">Tecnologia • Segurança • Performance</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#servicos" class="text-gray-700 hover:text-blue-800 font-medium">Serviços</a>
+                    <a href="#avaliacao" class="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors">Avaliação Gratuita</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 relative overflow-hidden">
+        <div class="brasilia-pattern absolute inset-0 opacity-30"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-5xl font-bold mb-6">Transforme sua Infraestrutura de TI</h2>
+                <p class="text-xl mb-8 text-blue-100 leading-relaxed">
+                    Avaliação gratuita completa da sua infraestrutura tecnológica no Distrito Federal. 
+                    Identifique oportunidades, riscos e o potencial de modernização da sua empresa.
+                </p>
+                <div class="grid md:grid-cols-4 gap-6 mb-12">
+                    <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">100% Gratuito</h3>
+                        <p class="text-blue-100 text-sm">Diagnóstico completo sem custos</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">48h Resposta</h3>
+                        <p class="text-blue-100 text-sm">Relatório detalhado em até 2 dias</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">Atendimento DF</h3>
+                        <p class="text-blue-100 text-sm">Presencial no Distrito Federal</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">Análise Completa</h3>
+                        <p class="text-blue-100 text-sm">Infraestrutura, segurança e performance</p>
+                    </div>
+                </div>
+                <a href="#avaliacao" class="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors inline-block">
+                    Solicitar Avaliação Gratuita
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços Section -->
+    <section id="servicos" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Nossos Serviços Especializados</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Soluções completas em TI, segurança e modernização digital para empresas no Distrito Federal
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Serviço 1 -->
+                <div class="service-card p-8 rounded-2xl">
+                    <div class="w-16 h-16 service-icon rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Gestão e Performance</h3>
+                    <p class="text-gray-600 mb-4">Reestruturação de processos operacionais com implementação de KPIs para aumento de resultados.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Aumento de produtividade até 40%</li>
+                        <li>• Processos padronizados</li>
+                        <li>• Monitoramento em tempo real</li>
+                    </ul>
+                </div>
+
+                <!-- Serviço 2 -->
+                <div class="service-card p-8 rounded-2xl">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-600 to-green-500 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Modernização Digital</h3>
+                    <p class="text-gray-600 mb-4">CRM customizado, omnichannel e telefonia em nuvem para otimizar sua operação.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Redução de 60% no tempo de resposta</li>
+                        <li>• Comunicação centralizada</li>
+                        <li>• Automação de processos</li>
+                    </ul>
+                </div>
+
+                <!-- Serviço 3 -->
+                <div class="service-card p-8 rounded-2xl">
+                    <div class="w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-600 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Redes Críticas</h3>
+                    <p class="text-gray-600 mb-4">Infraestrutura de redes corporativas com tecnologias avançadas para missão crítica.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• MPLS, SDH, DWDM, SD-WAN</li>
+                        <li>• Alta disponibilidade 99.9%</li>
+                        <li>• Monitoramento 24/7</li>
+                    </ul>
+                </div>
+
+                <!-- Serviço 4 -->
+                <div class="service-card p-8 rounded-2xl">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-500 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Segurança da Informação</h3>
+                    <p class="text-gray-600 mb-4">SOC/NOC, SIEM e conformidade com LGPD, ISO 27001 e NIST para proteção completa.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Monitoramento 24/7 de ameaças</li>
+                        <li>• Conformidade regulatória</li>
+                        <li>• Resposta rápida a incidentes</li>
+                    </ul>
+                </div>
+
+                <!-- Serviço 5 -->
+                <div class="service-card p-8 rounded-2xl">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-purple-500 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Transformação com IA</h3>
+                    <p class="text-gray-600 mb-4">Inteligência Artificial e automação de rotinas críticas alinhadas às suas metas.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Automação inteligente</li>
+                        <li>• Análise avançada de dados</li>
+                        <li>• ROI mensurável</li>
+                    </ul>
+                </div>
+
+                <!-- Serviço 6 -->
+                <div class="service-card p-8 rounded-2xl">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-600 to-orange-500 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Treinamentos Especializados</h3>
+                    <p class="text-gray-600 mb-4">Bootcamps técnicos e capacitação para criar autonomia tecnológica na sua equipe.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Bootcamps SOC/NOC</li>
+                        <li>• Workshops especializados</li>
+                        <li>• Autonomia tecnológica</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário de Avaliação -->
+    <section id="avaliacao" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Avaliação Gratuita de Infraestrutura</h2>
+                    <p class="text-xl text-gray-600">
+                        Preencha o formulário detalhado para receber uma análise completa da sua infraestrutura de TI
+                    </p>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm font-medium text-gray-600">Progresso</span>
+                        <span class="text-sm font-medium text-gray-600" id="progress-text">Etapa 1 de 5</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="progress-bar bg-blue-800 h-2 rounded-full" style="width: 20%" id="progress-bar"></div>
+                    </div>
+                </div>
+
+                <form id="assessment-form" class="bg-white rounded-2xl shadow-xl p-8">
+                    <!-- Etapa 1: Informações da Empresa -->
+                    <div class="form-step active" id="step-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Informações da Empresa</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nome da Empresa *</label>
+                                <input type="text" name="company_name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">CNPJ</label>
+                                <input type="text" name="cnpj" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="00.000.000/0000-00">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Setor de Atuação *</label>
+                                <select name="industry" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Selecione o setor</option>
+                                    <option value="saude">Saúde</option>
+                                    <option value="educacao">Educação</option>
+                                    <option value="financeiro">Financeiro</option>
+                                    <option value="governo">Governo</option>
+                                    <option value="energia">Energia</option>
+                                    <option value="telecomunicacoes">Telecomunicações</option>
+                                    <option value="varejo">Varejo</option>
+                                    <option value="industria">Indústria</option>
+                                    <option value="servicos">Serviços</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Número de Funcionários *</label>
+                                <select name="employees" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Selecione</option>
+                                    <option value="1-10">1-10 funcionários</option>
+                                    <option value="11-50">11-50 funcionários</option>
+                                    <option value="51-100">51-100 funcionários</option>
+                                    <option value="101-500">101-500 funcionários</option>
+                                    <option value="500+">Mais de 500 funcionários</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Endereço Completo *</label>
+                                <textarea name="address" required rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Rua, número, bairro, cidade - DF"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 2: Contato Responsável -->
+                    <div class="form-step" id="step-2">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Contato Responsável</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
+                                <input type="text" name="contact_name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Cargo/Função *</label>
+                                <input type="text" name="position" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email Corporativo *</label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Telefone/WhatsApp *</label>
+                                <input type="tel" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="(61) 99999-9999">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Melhor horário para contato</label>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="contact_time[]" value="manha" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Manhã (8h-12h)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="contact_time[]" value="tarde" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Tarde (12h-18h)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="contact_time[]" value="noite" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Noite (18h-20h)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="contact_time[]" value="qualquer" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Qualquer horário</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 3: Infraestrutura Atual -->
+                    <div class="form-step" id="step-3">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Infraestrutura Atual</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Equipamentos de TI (marque todos que possuem):</label>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="equipment[]" value="servidores" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Servidores físicos</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="equipment[]" value="nuvem" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Serviços em nuvem</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="equipment[]" value="switches" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Switches de rede</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="equipment[]" value="roteadores" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Roteadores</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="equipment[]" value="firewall" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Firewall</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="equipment[]" value="wifi" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Rede Wi-Fi</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="equipment[]" value="backup" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Sistema de backup</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="equipment[]" value="ups" class="checkbox-custom mr-2">
+                                        <span class="text-sm">No-break/UPS</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="equipment[]" value="cameras" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Câmeras de segurança</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Velocidade da Internet</label>
+                                    <select name="internet_speed" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="">Selecione</option>
+                                        <option value="ate-10mb">Até 10 Mbps</option>
+                                        <option value="10-50mb">10-50 Mbps</option>
+                                        <option value="50-100mb">50-100 Mbps</option>
+                                        <option value="100-500mb">100-500 Mbps</option>
+                                        <option value="500mb+">Mais de 500 Mbps</option>
+                                        <option value="nao-sei">Não sei informar</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Provedor de Internet</label>
+                                    <input type="text" name="isp" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Vivo, Claro, NET, etc.">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Sistemas utilizados atualmente</label>
+                                <textarea name="current_systems" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: ERP, CRM, sistema de gestão, etc."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 4: Necessidades e Problemas -->
+                    <div class="form-step" id="step-4">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Necessidades e Problemas</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Principais problemas enfrentados (marque todos que se aplicam):</label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="problems[]" value="lentidao" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Lentidão nos sistemas</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="problems[]" value="instabilidade" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Instabilidade da rede</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="problems[]" value="seguranca" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Problemas de segurança</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="problems[]" value="backup" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Falhas no backup</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="problems[]" value="integracao" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Falta de integração entre sistemas</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="problems[]" value="suporte" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Falta de suporte técnico</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="problems[]" value="custos" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Custos elevados de TI</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="problems[]" value="produtividade" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Baixa produtividade da equipe</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Áreas de interesse para modernização:</label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="interests[]" value="gestao" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Gestão e Performance</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="interests[]" value="digitalizacao" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Modernização Digital</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="interests[]" value="redes" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Redes e Infraestrutura</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="interests[]" value="seguranca" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Segurança da Informação</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="interests[]" value="ia" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Inteligência Artificial</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="interests[]" value="treinamento" class="checkbox-custom mr-2">
+                                        <span class="text-sm">Treinamentos</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Orçamento estimado para TI (mensal)</label>
+                                    <select name="budget" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="">Selecione</option>
+                                        <option value="ate-5k">Até R$ 5.000</option>
+                                        <option value="5k-15k">R$ 5.000 - R$ 15.000</option>
+                                        <option value="15k-30k">R$ 15.000 - R$ 30.000</option>
+                                        <option value="30k-50k">R$ 30.000 - R$ 50.000</option>
+                                        <option value="50k+">Mais de R$ 50.000</option>
+                                        <option value="nao-definido">Não definido</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Urgência da implementação</label>
+                                    <select name="urgency" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="">Selecione</option>
+                                        <option value="imediata">Imediata (até 30 dias)</option>
+                                        <option value="curto">Curto prazo (1-3 meses)</option>
+                                        <option value="medio">Médio prazo (3-6 meses)</option>
+                                        <option value="longo">Longo prazo (6+ meses)</option>
+                                        <option value="planejamento">Apenas planejamento</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 5: Informações Adicionais -->
+                    <div class="form-step" id="step-5">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Informações Adicionais</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Descreva detalhadamente os principais desafios de TI da sua empresa</label>
+                                <textarea name="challenges" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Descreva os problemas específicos, impactos no negócio e expectativas..."></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Objetivos específicos com a modernização de TI</label>
+                                <textarea name="objectives" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: aumentar produtividade, reduzir custos, melhorar segurança, etc."></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Preferência para a avaliação:</label>
+                                <div class="space-y-3">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="assessment_type" value="presencial" class="mr-3">
+                                        <span class="text-sm">Avaliação presencial (recomendado para análise completa)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="assessment_type" value="remota" class="mr-3">
+                                        <span class="text-sm">Avaliação remota (videoconferência + acesso remoto)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="assessment_type" value="hibrida" class="mr-3">
+                                        <span class="text-sm">Avaliação híbrida (presencial + remota)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="bg-blue-50 p-6 rounded-lg">
+                                <h4 class="font-semibold text-gray-900 mb-3">O que você receberá:</h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        Relatório detalhado da infraestrutura atual
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        Análise de vulnerabilidades e riscos
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        Recomendações personalizadas de melhorias
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        Roadmap de implementação com prazos e custos
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        Consultoria de 1 hora para esclarecimentos
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="flex items-start">
+                                <input type="checkbox" name="terms" required class="checkbox-custom mr-3 mt-1">
+                                <label class="text-sm text-gray-600">
+                                    Concordo com os <a href="#" class="text-blue-600 hover:underline">termos de uso</a> e 
+                                    <a href="#" class="text-blue-600 hover:underline">política de privacidade</a>. 
+                                    Autorizo o contato da DigiTICall para agendamento da avaliação gratuita.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Navegação -->
+                    <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">
+                        <button type="button" id="prev-btn" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors" style="display: none;">
+                            Anterior
+                        </button>
+                        <button type="button" id="next-btn" class="px-6 py-3 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition-colors ml-auto">
+                            Próximo
+                        </button>
+                        <button type="submit" id="submit-btn" class="px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors ml-auto" style="display: none;">
+                            Solicitar Avaliação Gratuita
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Flutuante -->
+    <div class="floating-cta">
+        <a href="#avaliacao" class="flex items-center text-white font-semibold">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Avaliação Gratuita
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-800 to-green-600 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">DigiTICall</h3>
+                            <p class="text-gray-400 text-sm">Tecnologia • Segurança • Performance</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Soluções completas em TI, segurança digital e modernização para empresas no Distrito Federal e Entorno.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contato</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📍 Distrito Federal, Brasil</p>
+                        <p>📞 (61) 99999-9999</p>
+                        <p>✉️ contato@digiticall.com.br</p>
+                        <p>🕒 Segunda a Sexta: 8h às 18h</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Nossos Serviços</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li>• Gestão e Performance</li>
+                        <li>• Modernização Digital</li>
+                        <li>• Redes e Infraestrutura Crítica</li>
+                        <li>• Segurança da Informação</li>
+                        <li>• Transformação com IA</li>
+                        <li>• Treinamentos Especializados</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 DigiTICall. Todos os direitos reservados.</p>
+                <p class="mt-2 text-sm">"Tecnologia, Segurança e Performance para o seu negócio"</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Multi-step form functionality
+        let currentStep = 1;
+        const totalSteps = 5;
+
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            
+            // Show current step
+            document.getElementById(`step-${step}`).classList.add('active');
+            
+            // Update progress bar
+            const progress = (step / totalSteps) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `Etapa ${step} de ${totalSteps}`;
+            
+            // Update buttons
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            prevBtn.style.display = step === 1 ? 'none' : 'block';
+            nextBtn.style.display = step === totalSteps ? 'none' : 'block';
+            submitBtn.style.display = step === totalSteps ? 'block' : 'none';
+        }
+
+        function validateStep(step) {
+            const currentStepElement = document.getElementById(`step-${step}`);
+            const requiredFields = currentStepElement.querySelectorAll('[required]');
+            
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    field.focus();
+                    field.classList.add('border-red-500');
+                    setTimeout(() => field.classList.remove('border-red-500'), 3000);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Next button
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (validateStep(currentStep)) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            }
+        });
+
+        // Previous button
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        // Form submission
+        document.getElementById('assessment-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!validateStep(currentStep)) {
+                return;
+            }
+            
+            // Collect form data
+            const formData = new FormData(e.target);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // Simulate form submission
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Formulário enviado com sucesso! Entraremos em contato em até 24 horas para agendar sua avaliação gratuita.');
+                console.log('Form data:', data);
+                
+                // Reset form
+                e.target.reset();
+                currentStep = 1;
+                showStep(currentStep);
+                
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Phone mask
+        document.querySelector('input[name="phone"]').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+            value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+            e.target.value = value;
+        });
+
+        // CNPJ mask
+        document.querySelector('input[name="cnpj"]').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+            value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+            value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+            value = value.replace(/(\d{4})(\d)/, '$1-$2');
+            e.target.value = value;
+        });
+
+        // Initialize form
+        showStep(1);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9844d66061ace2a2',t:'MTc1ODc0MzcwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
